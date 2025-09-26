@@ -128,7 +128,7 @@ The ONNX weight file obtained from  **[DDTRobotLab](https://github.com/cmjang/dd
 /usr/src/tensorrt/bin/trtexec --onnx=policy.onnx --saveEngine=stand.engine
 ```
 
-### Acknowlegments
+## Acknowlegments
 
 This project is built with reference to related open-source projects. Special thanks to:
 
