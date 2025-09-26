@@ -1,0 +1,4 @@
+tita_bringup:
+  ros__parameters:
+    mask_thresh: 200
+    pub_freq: 10
