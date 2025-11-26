@@ -1,0 +1,25 @@
+joy_controller:
+  twist_linear_ratio: {
+    type: double,
+    default_value: 1,
+    description: "Max velocity of command input",
+    validation: { bounds<>: [0.0, 10.0] },
+  }
+  twist_angular_ratio: {
+    type: double,
+    default_value: 1,
+    description: "Max velocity of command input",
+    validation: { bounds<>: [0.0, 10.0] },
+  }
+  orientation_ratio: {
+    type: double,
+    default_value: 0.2,
+    description: "Max velocity of command input",
+    validation: { bounds<>: [0.0, 10.0] },
+  }
+  position_ratio: {
+    type: double,
+    default_value: 0.05,
+    description: "Max velocity of command input",
+    validation: { bounds<>: [0.0, 10.0] },
+  }

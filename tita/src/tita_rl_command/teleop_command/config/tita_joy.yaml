@@ -1,0 +1,17 @@
+/**:
+  teleop_command_node:
+    ros__parameters:
+      DebugMode: false
+      AxesSize: 8
+      MoveAxes: "a0"
+      TurnAxes: "a1"
+      PitchAxes: "a2"
+      RollAxes: "a3"
+      StandUp: "b4"
+      HeightSwitch: "b5"
+      JumpButton: "b6"
+      SpeedButton: "b7"
+      AxesBias: 0.0013
+
+    
+    

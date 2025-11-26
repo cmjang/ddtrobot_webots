@@ -1,0 +1,5 @@
+/**:
+  command_manager_node:
+    ros__parameters:
+      value1: 1.0
+      value2: 2.0

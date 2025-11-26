@@ -1,0 +1,16 @@
+std_msgs/Header header
+string fsm_state_name
+geometry_msgs/Vector3 twist_linear
+geometry_msgs/Vector3 twist_linear_int
+geometry_msgs/Vector3 twist_angular
+geometry_msgs/Vector3 twist_angular_int
+geometry_msgs/Vector3 pose_position
+geometry_msgs/Vector3 pose_position_dot
+geometry_msgs/Vector3 pose_rpy
+geometry_msgs/Vector3 pose_rpy_dot
+float64 two_wheel_distance
+float64 two_wheel_distance_dot
+
+float64[] joint_positions
+float64[] joint_velocities
+float64[] joint_torques

@@ -1,0 +1,606 @@
+tita_controller:
+  update_rate:
+    {
+      type: int,
+      default_value: 500,
+      description: "Main control loop update rate in Hz",
+    }
+  joints:
+    {
+      type: string_array,
+      default_value: [],
+      description: "Joint names to control and listen to",
+      read_only: true,
+      validation: { unique<>: null },
+    }
+  robot_description_path:
+    {
+      type: string,
+      default_value: "/usr/share/robot_description/tita/urdf/robot.urdf",
+    }
+  lqr_update_rate:
+    {
+      type: int,
+      default_value: 200,
+      description: "Lqr Thread update rate in Hz",
+    }
+
+  wheel_radius:
+    {
+      type: double,
+      default_value: 0.0925,
+      description: "Radius of a wheel, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.",
+    }
+
+  wheel_joint_name:
+    {
+      type: string_array,
+      default_value: ["joint_left_leg_4", "joint_right_leg_4"],
+      description: "Joint names to control and listen to",
+      read_only: true,
+      validation: { unique<>: null },
+    }
+
+  base_name: 
+    {
+      type: string,
+      default_value: base_link,
+      description: "Name of the base frame",
+    }
+
+  static_friction_coefficient:
+    {
+      type: double,
+      default_value: 0.0,
+      description: "Radius of a wheel, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.",
+    }
+
+  sliding_friction_coefficient:
+    {
+      type: double,
+      default_value: 0.3,
+      description: "Radius of a wheel, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.",
+    }
+
+  task: 
+    twist_linear_x:
+      max_velocity:
+        {
+          type: double,
+          default_value: 1,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 10.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 1,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 10.0] },
+        }
+      min_velocity:
+        {
+          type: double,
+          default_value: -1,
+          description: "Min velocity of command input",
+          validation: { bounds<>: [-10.0, 0.0] },
+        }
+      min_acceleration:
+        {
+          type: double,
+          default_value: -1,
+          description: "Min acceleration of command input",
+          validation: { bounds<>: [-10.0, 0.0] },
+        }
+      q0:
+        {
+          type: double,
+          default_value: 500,
+          description: "Lqr gain",
+          validation: { bounds<>: [0.001, 1000] },
+        }
+      q1:
+        {
+          type: double,
+          default_value: 2500,
+          description: "Lqr gain",
+          validation: { bounds<>: [0.001, 10000] },
+        }
+      q2:
+        {
+          type: double,
+          default_value: 6800,
+          description: "Lqr gain",
+          validation: { bounds<>: [0.001, 10000] },
+        }
+      q3:
+        {
+          type: double,
+          default_value: 1500,
+          description: "Lqr gain",
+          validation: { bounds<>: [0.001, 10000] },
+        }
+      r0:
+        {
+          type: double,
+          default_value: 1,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.001, 10] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.01, 100] },
+        }
+    twist_angular_z:
+      max_velocity:
+        {
+          type: double,
+          default_value: 1,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 20.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 3,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 20.0] },
+        }   
+      kp:
+        {
+          type: double,
+          default_value: 150,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 25,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    pose_position_y:
+      max_position:
+        {
+          type: double,
+          default_value: 0.10,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.0, 0.12] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.06,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 0.1] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 40,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 100.0] },
+        }
+      kp:
+        {
+          type: double,
+          default_value: 400,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 40,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    pose_position_z:
+      max_position:
+        {
+          type: double,
+          default_value: 0.4,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.3, 0.5] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.1,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 50.0,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 100.0] },
+        }
+      min_position:
+        {
+          type: double,
+          default_value: 0.2,
+          description: "Min position of command input",
+          validation: { bounds<>: [0.1, 0.3] },
+        }
+      # min_velocity:
+      #   {
+      #     type: double,
+      #     default_value: -0.2,
+      #     description: "Min velocity of command input",
+      #     validation: { bounds<>: [-3.0, 0.0] },
+      #   }
+      # min_acceleration:
+      #   {
+      #     type: double,
+      #     default_value: -10,
+      #     description: "Min acceleration of command input",
+      #     validation: { bounds<>: [-50.0, 0.0] },
+      #   }      
+      kp:
+        {
+          type: double,
+          default_value: 300,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 10,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    pose_orientation_yaw:
+      max_position:
+        {
+          type: double,
+          default_value: 0.10,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.1,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 20,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 100.0] },
+        }   
+      kp:
+        {
+          type: double,
+          default_value: 1500,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 40,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    pose_orientation_pitch:
+      max_position:
+        {
+          type: double,
+          default_value: 0.2,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.8,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 30,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 100.0] },
+        }
+      kp:
+        {
+          type: double,
+          default_value: 700,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 120,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    pose_orientation_roll:
+      max_position:
+        {
+          type: double,
+          default_value: 0.2,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.0, 1.5] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.8,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 3.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 30.0,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 100.0] },
+        } 
+      kp:
+        {
+          type: double,
+          default_value: 600,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0.0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 50,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+    two_wheel_distance:
+      default_value: 
+        {
+          type: double,
+          default_value: 0.285,
+          description: "Distance between the two wheels",
+          # read_only: true,
+        }
+
+      max_position:
+        {
+          type: double,
+          default_value: 0.05,
+          description: "Max position of command input",
+          validation: { bounds<>: [0.0, 0.1] },
+        }
+      max_velocity:
+        {
+          type: double,
+          default_value: 0.05,
+          description: "Max velocity of command input",
+          validation: { bounds<>: [0.0, 1.0] },
+        }
+      max_acceleration:
+        {
+          type: double,
+          default_value: 10,
+          description: "Max acceleration of command input",
+          validation: { bounds<>: [0.0, 50.0] },
+        }
+      min_position:
+        {
+          type: double,
+          default_value: -0.05,
+          description: "Min position of command input",
+          validation: { bounds<>: [-0.1, 0.0] },
+        }
+      min_velocity:
+        {
+          type: double,
+          default_value: -0.05,
+          description: "Min velocity of command input",
+          validation: { bounds<>: [-1.0, 0.0] },
+        }
+      min_acceleration:
+        {
+          type: double,
+          default_value: -10,
+          description: "Min acceleration of command input",
+          validation: { bounds<>: [-50.0, 0.0] },
+        }      
+      kp:
+        {
+          type: double,
+          default_value: 1500,
+          description: "Proportional gain :math:`k_p` for PID",
+          validation: { bounds<>: [0, 10000] },
+        }
+      kd:
+        {
+          type: double,
+          default_value: 200,
+          description: "Integral gain :math:`k_d` for PID",
+          validation: { bounds<>: [0, 1000] },
+        }
+      weight:
+        {
+          type: double,
+          default_value: 1,
+          description: "Derivative gain :math:`k_d` for PID",
+          validation: { bounds<>: [0.0, 100] },
+        }
+
+  torque_limit: {
+    type: double_array,
+    default_value: [60.0, 60.0, 60.0, 15.0, 60.0, 60.0, 60.0, 15.0],
+    description: "Max torque of every joint motor.",
+    validation: {
+      fixed_size<>: [8],
+    }
+  }
+  joint_pd:
+    p: {
+      type: double_array,
+      default_value: [600.0, 80.0, 80.0, 5.0, 600.0, 80.0, 80.0, 5.0],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+    d: {
+      type: double_array,
+      default_value: [8.0, 8.0, 8.0, 0.2, 8.0, 8.0, 8.0, 0.2],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+
+  # for rl
+  rl_joint_pd:
+    p: {
+      type: double_array,
+      default_value: [40.0, 40.0, 40.0, 10.0, 40.0, 40.0, 40.0, 10.0],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+    d: {
+      type: double_array,
+      default_value: [1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 0.5],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+  # for wbc
+  wbc_joint_pd:
+    p: {
+      type: double_array,
+      default_value: [100.0, 00.0, 100.0, 0.0, 100.0, 00.0, 100.0, 0.0],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+    d: {
+      type: double_array,
+      default_value: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      description: "Max torque of every joint motor.",
+      validation: {
+        fixed_size<>: [8],
+      }
+    }
+    # for test
+  single_joint_pd1:
+    p: {
+      type: double,
+      default_value: 000.0,
+    }
+    d: {
+      type: double,
+      default_value: 0.0,
+    }
+  single_joint_pd2:
+    p: {
+      type: double,
+      default_value: 000.0,
+    }
+    d: {
+      type: double,
+      default_value: 0.0,
+    }
+  single_joint_pd3:
+    p: {
+      type: double,
+      default_value: 000.0,
+    }
+    d: {
+      type: double,
+      default_value: 0.0,
+    }
+  single_joint_pd4:
+    p: {
+      type: double,
+      default_value: 000.0,
+    }
+    d: {
+      type: double,
+      default_value: 0.0,
+    }
+  estimator:
+    imu_process_noise_position: {
+      type: double,
+      default_value: 0.02
+    }
+    imu_process_noise_velocity: {
+      type: double,
+      default_value: 0.02
+    }
+    foot_process_noise_position: {
+      type: double,
+      default_value: 0.05
+    }
+    imu_sensor_noise_position: {
+      type: double,
+      default_value: 0.005
+    }
+    imu_sensor_noise_velocity: {
+      type: double,
+      default_value: 0.1
+    }
+    foot_sensor_noise_position: {
+      type: double,
+      default_value: 0.01
+    }
+

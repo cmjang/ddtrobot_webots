@@ -1,0 +1,37 @@
+/**:
+  robot_inertia_calculator_node:
+    ros__parameters:
+      arm_names: 
+        - "airbot1"
+        # - "airbot2"
+      airbot1: 
+        urdf_path: /usr/share/robot_model/urdf/airbot_play_with_gripper.urdf
+        joint_states_name: /airbot_play/joint_states
+        transform:
+          position:
+            x: 0.01447
+            y: 0.0
+            z: 0.1573
+          orientation:
+            x: 0.0
+            y: 0.0
+            z: 0.0
+            w: 1.0
+      airbot2: 
+        urdf_path: /usr/share/robot_model/urdf/airbot_play_with_gripper.urdf
+        joint_states_name: /airbot_play/joint_states
+        transform:
+          position:
+            x: 0.01447
+            y: 0.0
+            z: 0.1573
+          orientation:
+            x: 0.0
+            y: 0.0
+            z: 0.0
+            w: 1.0
+      
+      tita_urdf_path: /usr/share/robot_description/tita/urdf/robot.urdf
+    
+
+      

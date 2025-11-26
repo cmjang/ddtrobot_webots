@@ -1,0 +1,21 @@
+<library path="tita_controller">
+  <class 
+    name="tita_locomotion/TitaController" 
+    type="tita_locomotion::TitaController" 
+    base_class_type="controller_interface::ControllerInterface">
+  <description>
+    Controls joint positions with a limited velocity, acceleration and jerk.
+  </description>
+  </class>
+
+  <!-- <class 
+    name="tita_locomotion/CheaterTitaController" 
+    type="tita_locomotion::CheaterTitaController" 
+    base_class_type="controller_interface::ControllerInterface">
+  <description>
+    Cheater controller use gps .
+  </description>
+  </class> -->
+
+
+</library>

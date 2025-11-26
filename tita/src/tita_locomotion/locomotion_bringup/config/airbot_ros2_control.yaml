@@ -1,0 +1,43 @@
+/**:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100
+
+      airbot_joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
+
+      airbot_joint_position_controller:
+        type: position_controllers/JointGroupPositionController
+      
+      airbot_joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+        
+  airbot_joint_trajectory_controller:
+    ros__parameters:
+      joints:
+        - joint1
+        - joint2
+        - joint3
+        - joint4
+        - joint5
+        - joint6
+      command_interfaces:
+        - position
+        - velocity
+        # - effort
+      state_interfaces:
+        - position
+        - velocity
+        # - effort
+
+      allow_partial_joints_goal: false
+
+  airbot_joint_position_controller:
+    ros__parameters:
+      joints:
+        - joint1
+        - joint2
+        - joint3
+        - joint4
+        - joint5
+        - joint6
